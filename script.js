@@ -48,6 +48,47 @@ document.addEventListener(
         this.classList.remove('mole');
         setInterval(this.classList.add('deadmole'), 200); 
     } 
+
+    function gamePlay() {
+        moleInterval = setInterval(() => { 
+            if (!gameOver) comeout(); 
+        }, gamespeed);
+    }
+
+    function startLevel() {
+        timer = 60;
+        timerDisplay.textContent = `Time: ${timer}s`; 
+
+        countdown = setInterval(() => { 
+            timer--; 
+            timerDisplay.textContent = `Time: ${timer}s`; 
+      
+            if (timer <= 0) { 
+                clearInterval(countdown); 
+                if (score >= goalscore) {
+                    level++;
+                    startLevel()
+                    levelDisplay.textContent = `Level: ${level}`;
+/*                     gamespeed = speedArray[level];
+                    console.log(`${gamespeed}`);
+                    goalscore = goalArray[level];
+                    console.log(`${goalscore}`)
+ */
+                }
+                else {
+                    gameOver = true; 
+                    // alert(`Game Over!\nYour final score: ${score}`);
+                    console.log('game over'); 
+                    startButton.disabled = false; 
+                    endButton.disabled = true; 
+                    }
+                    
+                } 
+            }, 1000)
+
+        gamePlay();
+
+    }
   
     function startGame() { 
         if (!gameOver) { 
@@ -60,14 +101,14 @@ document.addEventListener(
         gameOver = false; 
         score = 0; 
         scoreDisplay.textContent = `Score: ${score}`; 
-        timer = 60; 
-        timerDisplay.textContent = `Time: ${timer}s`; 
         level = 1;
         levelDisplay.textContent = `Level: ${level}`;
         
         startButton.disabled = true; 
         endButton.disabled = false; 
-        gamespeed = 1800;
+
+        startLevel(level);
+       /*  gamespeed = 1800;
 
         goalscore = 20;
             
@@ -96,17 +137,11 @@ document.addEventListener(
                     }
                     
                 } 
-            }, 1000); 
+            }, 1000);  */
       
         
-            moleInterval = setInterval(() => { 
-                if (!gameOver) comeout(); 
-            }, gamespeed); 
+ 
 
-        
-  
-        
-  
     console.log("Game started"); 
     } 
   
@@ -114,7 +149,7 @@ document.addEventListener(
         clearInterval(countdown); 
         clearInterval(moleInterval); 
         gameOver = true; 
-        alert(`Game Ended!\nYour final score: ${score}`); 
+        // alert(`Game Ended!\nYour final score: ${score}`); 
         score = 0; 
         timer = 60; 
         scoreDisplay.textContent = `Score: ${score}`; 

@@ -31,3 +31,4 @@
 # Function endGame () 
  - this is used if the game is ended using the end button before the timer runs out. Similar execution applies.
 
+https://stackoverflow.com/questions/5978519/how-can-i-use-setinterval-and-clearinterval
