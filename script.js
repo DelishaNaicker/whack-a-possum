@@ -19,7 +19,7 @@ document.addEventListener(
     let speedArray = [1800, 1600, 1400, 1200, 1000]
     let goalArray = [30, 25, 20, 15, 10]
     let gamespeed = 1800;
-    let goalscore = 20;
+    let goalscore = 5;
     let countdown; 
     let moleInterval; 
       
@@ -51,12 +51,14 @@ document.addEventListener(
 
     function gamePlay() {
         moleInterval = setInterval(() => { 
-            if (!gameOver) comeout(); 
+            if (!gameOver) {
+            comeout();
+            }    
         }, gamespeed);
     }
 
     function startLevel() {
-        timer = 60;
+        timer = 20;
         timerDisplay.textContent = `Time: ${timer}s`; 
 
         countdown = setInterval(() => { 
@@ -67,7 +69,12 @@ document.addEventListener(
                 clearInterval(countdown); 
                 if (score >= goalscore) {
                     level++;
-                    startLevel()
+                    if (level==6) {
+                        alert(`Game Over!\nYour final score: ${score}`);
+                        gameOver = true; 
+                    };
+                    clearInterval(moleInterval);
+                    startLevel();
                     levelDisplay.textContent = `Level: ${level}`;
 /*                     gamespeed = speedArray[level];
                     console.log(`${gamespeed}`);
@@ -107,7 +114,7 @@ document.addEventListener(
         startButton.disabled = true; 
         endButton.disabled = false; 
 
-        startLevel(level);
+        startLevel();
        /*  gamespeed = 1800;
 
         goalscore = 20;
@@ -151,7 +158,7 @@ document.addEventListener(
         gameOver = true; 
         // alert(`Game Ended!\nYour final score: ${score}`); 
         score = 0; 
-        timer = 60; 
+        timer = 20; 
         scoreDisplay.textContent = `Score: ${score}`; 
         timerDisplay.textContent = `Time: ${timer}s`; 
         startButton.disabled = false; 
