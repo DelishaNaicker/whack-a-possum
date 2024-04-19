@@ -12,7 +12,7 @@ body {
     width: 100%;
     text-align: left;
     margin: 40px;
-    
+
 }
 
 .flex-container {
@@ -128,7 +128,7 @@ body {
   
   /* The Close Button */
   .close {
-    color: #aaa;
+    color: #000;
     float: right;
     font-size: 28px;
     font-weight: bold;

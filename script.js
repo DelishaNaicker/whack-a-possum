@@ -22,7 +22,7 @@ document.addEventListener(
     let level = 1; 
     let score = 0;
     let speedArray = [1800, 1600, 1400, 1200, 1000]
-    let goalArray = [10, 12, 14, 16, 18, "You won!"]
+    let goalArray = [10, 12, 13, 14, 15, "You won!"]
     let gamespeed = 1800;
     let goalscore = 10;
     let countdown; 
@@ -97,14 +97,7 @@ document.addEventListener(
                             startLevel(); 
                         }
                       }
-                    window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                        if (!gameOver && modal.style.display == "none") {
-                            startLevel(); 
-                        }
-                    }
-                    }
+                   
                     
                 }
                 else {
