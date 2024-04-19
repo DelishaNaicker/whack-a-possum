@@ -1,5 +1,4 @@
-document.addEventListener( 
-    "DOMContentLoaded", function () { 
+document.addEventListener("DOMContentLoaded", (event) =>{ 
     const holes =  
         document.querySelectorAll(".hole"); 
     const startButton =  
