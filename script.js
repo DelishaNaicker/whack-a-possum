@@ -12,16 +12,22 @@ document.addEventListener(
         document.getElementById("score"); 
     const timerDisplay =  
         document.getElementById("timer"); 
+    const goalDisplay = 
+        document.getElementById("goal");
+    const modalDisplay = 
+        document.getElementById("modaltext");
+    
   
     let timer; 
     let level = 1; 
     let score = 0;
     let speedArray = [1800, 1600, 1400, 1200, 1000]
-    let goalArray = [30, 25, 20, 15, 10]
+    let goalArray = [10, 12, 14, 16, 18, "You won!"]
     let gamespeed = 1800;
-    let goalscore = 5;
+    let goalscore = 10;
     let countdown; 
     let moleInterval; 
+    let modal = document.getElementById("nextLevelModal");
       
     // Set the initial state to game over 
     let gameOver = true;  
@@ -59,6 +65,7 @@ document.addEventListener(
 
     function startLevel() {
         timer = 20;
+        score = 0;
         timerDisplay.textContent = `Time: ${timer}s`; 
 
         countdown = setInterval(() => { 
@@ -70,24 +77,40 @@ document.addEventListener(
                 if (score >= goalscore) {
                     level++;
                     if (level==6) {
-                        alert(`Game Over!\nYour final score: ${score}`);
-                        gameOver = true; 
+                        alert(`Game Over!\nYou won! \nNow your mom can't call you a loser anymore :P`);
+                        gameOver = true;
+                        endGame();
                     };
                     clearInterval(moleInterval);
-                    startLevel();
                     levelDisplay.textContent = `Level: ${level}`;
-/*                     gamespeed = speedArray[level];
+                    gamespeed = speedArray[level-1];
                     console.log(`${gamespeed}`);
-                    goalscore = goalArray[level];
-                    console.log(`${goalscore}`)
- */
+                    goalscore = goalArray[level-1];
+                    goalDisplay.textContent = `Goal: ${goalscore}`;
+                    console.log(`${goalscore}`);
+                    modal.style.display = "block";
+                    modalDisplay.textContent = `Congratulations! You cleared level: ${level-1}!`;
+                    let span = document.getElementsByClassName("close")[0];
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                        if (!gameOver && modal.style.display == "none") {
+                            startLevel(); 
+                        }
+                      }
+                    window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                        if (!gameOver && modal.style.display == "none") {
+                            startLevel(); 
+                        }
+                    }
+                    }
+                    
                 }
                 else {
                     gameOver = true; 
-                    // alert(`Game Over!\nYour final score: ${score}`);
-                    console.log('game over'); 
-                    startButton.disabled = false; 
-                    endButton.disabled = true; 
+                    alert(`Game Over!\nYou failed!`);
+                    endGame();
                     }
                     
                 } 
@@ -115,38 +138,6 @@ document.addEventListener(
         endButton.disabled = false; 
 
         startLevel();
-       /*  gamespeed = 1800;
-
-        goalscore = 20;
-            
-
-        countdown = setInterval(() => { 
-            timer--; 
-            timerDisplay.textContent = `Time: ${timer}s`; 
-      
-            if (timer <= 0) { 
-                clearInterval(countdown); 
-                if (score >= goalscore) {
-                    level++;
-                    levelDisplay.textContent = `Level: ${level}`;
-                    gamespeed = speedArray[level];
-                    console.log(`${gamespeed}`);
-                    goalscore = goalArray[level];
-                    console.log(`${goalscore}`)
-
-                }
-                else {
-                    gameOver = true; 
-                    alert(`Game Over!\nYour final score: ${score}`);
-                    console.log('game over'); 
-                    startButton.disabled = false; 
-                    endButton.disabled = true; 
-                    }
-                    
-                } 
-            }, 1000);  */
-      
-        
  
 
     console.log("Game started"); 
@@ -156,7 +147,6 @@ document.addEventListener(
         clearInterval(countdown); 
         clearInterval(moleInterval); 
         gameOver = true; 
-        // alert(`Game Ended!\nYour final score: ${score}`); 
         score = 0; 
         timer = 20; 
         scoreDisplay.textContent = `Score: ${score}`; 
@@ -168,3 +158,4 @@ document.addEventListener(
     startButton.addEventListener("click", startGame); 
     endButton.addEventListener("click", endGame); 
 });
+

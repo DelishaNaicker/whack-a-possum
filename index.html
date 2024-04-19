@@ -7,19 +7,21 @@
     <meta name="viewport"
            content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jersey 10 Charted">
     <title>Whac-A-Mole</title> 
 </head> 
 
 <body> 
-    <div class="game-info"> 
-        <div id="level">Level: 1</div> 
-        <div id="score">Score: 0</div>
-        <div id="timer">Time: 60s</div>
-        <div id="goal">Goal: 30</div>  
-    </div> 
+<div class="flex-container">
+    <div class="game-info flex-item-30"> 
+        <div class="gametext" id="level">Level: 1</div> 
+        <div class="gametext" id="score">Score: 0</div>
+        <div class="gametext" id="timer">Time: 60s</div>
+        <div class="gametext" id="goal">Goal: 10</div>  
     <button id="startButton">Start Game</button> 
     <button id="endButton" disabled>End Game</button> 
-    <div class="game-container"> 
+    </div>
+    <div class="game-container flex-item-70"> 
         <div class="hole" id="hole1"></div> 
         <div class="hole" id="hole2"></div> 
         <div class="hole" id="hole3"></div> 
@@ -29,7 +31,18 @@
         <div class="hole" id="hole7"></div> 
         <div class="hole" id="hole8"></div> 
         <div class="hole" id="hole9"></div> 
-    </div> 
+    </div>
+</div>
+
+    <div id="nextLevelModal" class="modal">
+
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p id="modaltext">Some text in the Modal..</p>
+        </div>
+      
+      </div>
+
     <script src="/script.js"></script> 
 </body> 
   
